@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'v1'
+require_relative 'api/v1'
 
 module MicroAds
   class App < Grape::API
-    mount ::MicroAds::V1
+    mount ::MicroAds::Api::V1
   end
 end

@@ -1,0 +1,5 @@
+[
+  { "title": "Ad 1", "description": "Description 1", "city": "London", "lat": 0, "lon": 0, "user_id": 1 },
+  { "title": "Ad 2", "description": "Description 2", "city": "London", "lat": 0, "lon": 0, "user_id": 1 },
+  { "title": "Ad 3", "description": "Description 3", "city": "London", "lat": 0, "lon": 0, "user_id": 2 }
+]

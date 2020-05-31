@@ -4,6 +4,14 @@
 
 ```
 $ bundle install
+
+# create database manually by psql
+
+$ rake db:migrate
+# or reset db
+$ rake db:reset
+
+$ rake db:seed
 $ rackup
 ```
 
