@@ -29,19 +29,15 @@ module Api
       requires :user_id,     type: String, desc: 'User ID'
     end
     post 'ads' do
-      current_date = DateTime.now
-      ad_id = Ad.insert(
-        title:       params[:title],
-        description: params[:description],
-        city:        params[:city],
-        lat:         params[:lat] ? params[:lat].to_f : nil,
-        lon:         params[:lon] ? params[:lon].to_f : nil,
-        user_id:     params[:user_id].to_i,
-        created_at:  current_date,
-        updated_at:  current_date
+      result = Ads::CreateService.call(
+        Ad.empty_params.merge(params)
       )
 
-      { ad: AdSerializer.new(Ad.first(id: ad_id)).serializable_hash }
+      if result.ad
+        { ad: AdSerializer.new(result.ad).serializable_hash }
+      else
+        ErrorSerializer.from_messages(result.errors)
+      end
     end
   end
 end

@@ -1,1 +1,11 @@
 en:
+  dry_validation:
+    errors:
+      ad:
+        rules:
+          title:
+            filled?: Title can't be blank
+          city:
+            filled?: City can't be blank
+          user_id:
+            filled?: User can't be blank

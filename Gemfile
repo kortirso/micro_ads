@@ -45,6 +45,7 @@ end
 group :test do
   gem 'database_cleaner-sequel', '~> 1.8.0'
   gem 'factory_bot', '~> 5.2.0'
+  gem 'json_spec'
   gem 'rack-test', '~> 1.1.0'
   gem 'rspec', '~> 3.9.0'
 end

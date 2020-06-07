@@ -1,1 +1,11 @@
 ru:
+  dry_validation:
+    errors:
+      ad:
+        rules:
+          title:
+            filled?: Заголовок не может быть пустым
+          city:
+            filled?: Город не может быть пустым
+          user_id:
+            filled?: Пользователь не может быть пустым
