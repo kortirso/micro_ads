@@ -1,0 +1,7 @@
+db:
+  adapter: postgresql
+  host: localhost
+  port: 5432
+  user:
+  password:
+  database: micro_ads

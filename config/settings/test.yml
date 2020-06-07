@@ -1,0 +1,3 @@
+db:
+  database: micro_ads_test
+  max_connections: 1

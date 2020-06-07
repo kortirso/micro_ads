@@ -1,18 +1,13 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'app'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+class Application < Grape::API
+  mount ::Api::V1
 
-require 'boot'
+  def self.root
+    File.expand_path('..', __dir__)
+  end
 
-Bundler.require :default, ENV['RACK_ENV']
-
-# database config
-require 'setup'
-# database models
-require 'models'
-# serializers
-require 'serializers'
-
-# api endpoints
-require 'app'
+  def self.environment
+    ENV['RACK_ENV'].to_sym
+  end
+end

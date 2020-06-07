@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
-ENV['RACK_ENV'] ||= :development
+ENV['RACK_ENV'] ||= 'development'
 
-require File.expand_path('../application', __FILE__)
+require 'bundler/setup'
+Bundler.require(:default, ENV['RACK_ENV'])
+
+require_relative 'application_loader'
+ApplicationLoader.load_app!
