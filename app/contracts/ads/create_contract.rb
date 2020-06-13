@@ -5,7 +5,7 @@ module Ads
     params do
       required(:title).filled(:string)
       required(:city).filled(:string)
-      optional(:description)
+      required(:description).filled(:string)
       optional(:lat)
       optional(:lon)
     end

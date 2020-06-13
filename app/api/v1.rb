@@ -23,8 +23,8 @@ module Api
       build_with Grape::Extensions::Hash::ParamBuilder
       requires :ad, type: Hash do
         requires :title,       type: String, desc: 'Title'
-        requires :description, type: String, desc: 'Description'
         requires :city,        type: String, desc: 'City'
+        optional :description, type: String, desc: 'Description'
         optional :lat,         type: Float,  desc: 'Latitude'
         optional :lon,         type: Float,  desc: 'Longitude'
       end
@@ -33,7 +33,7 @@ module Api
     post 'ads' do
       service = Ads::CreateService.call(params)
 
-      if result.success?
+      if service.success?
         { ad: AdSerializer.new(service.result).serializable_hash }
       else
         ErrorSerializer.from_messages(service.errors)
