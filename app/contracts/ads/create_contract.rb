@@ -2,10 +2,12 @@
 
 module Ads
   class CreateContract < Dry::Validation::Contract
-    schema do
+    params do
       required(:title).filled(:string)
       required(:city).filled(:string)
-      required(:user_id).filled(:integer)
+      optional(:description)
+      optional(:lat)
+      optional(:lon)
     end
   end
 end

@@ -21,20 +21,22 @@ module Api
     desc 'Creates ad'
     params do
       build_with Grape::Extensions::Hash::ParamBuilder
-      requires :title,       type: String, desc: 'Title'
-      requires :description, type: String, desc: 'Description'
-      requires :city,        type: String, desc: 'City'
-      optional :lat,         type: String, desc: 'Latitude'
-      optional :lon,         type: String, desc: 'Longitude'
-      requires :user_id,     type: String, desc: 'User ID'
+      requires :ad, type: Hash do
+        requires :title,       type: String, desc: 'Title'
+        requires :description, type: String, desc: 'Description'
+        requires :city,        type: String, desc: 'City'
+        optional :lat,         type: Float,  desc: 'Latitude'
+        optional :lon,         type: Float,  desc: 'Longitude'
+      end
+      requires :user_id, type: String, desc: 'User ID'
     end
     post 'ads' do
-      result = Ads::CreateService.call(params)
+      service = Ads::CreateService.call(params)
 
-      if result.ad
-        { ad: AdSerializer.new(result.ad).serializable_hash }
+      if result.success?
+        { ad: AdSerializer.new(service.result).serializable_hash }
       else
-        ErrorSerializer.from_messages(result.errors)
+        ErrorSerializer.from_messages(service.errors)
       end
     end
   end

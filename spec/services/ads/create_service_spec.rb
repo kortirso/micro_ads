@@ -6,12 +6,14 @@ RSpec.describe Ads::CreateService do
   context 'valid parameters' do
     let(:ad_params) do
       {
-        title:       'Ad title',
-        description: 'Ad description',
-        city:        'City',
-        lat:         nil,
-        lon:         nil,
-        user_id:     '1'
+        ad:      {
+          title:       'Ad title',
+          description: 'Ad description',
+          city:        'City',
+          lat:         nil,
+          lon:         nil
+        },
+        user_id: '1'
       }
     end
 
@@ -23,19 +25,21 @@ RSpec.describe Ads::CreateService do
     it 'and assigns ad' do
       result = subject.call(ad_params)
 
-      expect(result.ad).to be_kind_of(Ad)
+      expect(result.result).to be_kind_of(Ad)
     end
   end
 
   context 'invalid parameters' do
     let(:ad_params) do
       {
-        title:       'Ad title',
-        description: 'Ad description',
-        city:        '',
-        lat:         nil,
-        lon:         nil,
-        user_id:     '1'
+        ad:      {
+          title:       'Ad title',
+          description: 'Ad description',
+          city:        '',
+          lat:         nil,
+          lon:         nil
+        },
+        user_id: '1'
       }
     end
 
@@ -47,7 +51,7 @@ RSpec.describe Ads::CreateService do
     it 'and returns nil as ad' do
       result = subject.call(ad_params)
 
-      expect(result.ad).to eq nil
+      expect(result.result).to eq nil
     end
   end
 end
