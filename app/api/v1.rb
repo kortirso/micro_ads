@@ -36,7 +36,7 @@ module Api
       if service.success?
         { ad: AdSerializer.new(service.result).serializable_hash }
       else
-        ErrorSerializer.from_messages(service.errors)
+        error!(ErrorSerializer.from_messages(service.errors), 400)
       end
     end
   end

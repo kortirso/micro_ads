@@ -12,7 +12,7 @@ $ rake db:migrate
 $ rake db:reset
 
 $ rake db:seed
-$ rackup
+$ bin/puma
 ```
 
 ## Try

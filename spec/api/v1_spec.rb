@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
 describe Api::V1 do
-  include Rack::Test::Methods
-
-  def app
-    Api::V1
-  end
-
   context 'GET /api/v1' do
     it 'returns version of api' do
       get '/api/v1'
@@ -40,6 +34,28 @@ describe Api::V1 do
   end
 
   context 'POST /api/v1/ads' do
+    context 'with valid params' do
+      let(:params) { { ad: { title: '', description: '2', city: '3' }, user_id: 1 }.to_json }
+      let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
+      let(:request) { post '/api/v1/ads', params, headers }
+
+      it 'creates ad' do
+        expect { request }.not_to change(Ad, :count)
+      end
+
+      context 'in response' do
+        before { request }
+
+        it 'returns success status' do
+          expect(last_response.status).to eq(400)
+        end
+
+        it 'and returns error' do
+          expect(response_body['errors']).not_to eq nil
+        end
+      end
+    end
+
     context 'with valid params' do
       let(:params) { { ad: { title: '1', description: '2', city: '3' }, user_id: 1 }.to_json }
       let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }

@@ -6,6 +6,6 @@ module RouteHelpers
   end
 
   def response_body
-    JSON(last_response.body)
+    JSON.parse(last_response.body)
   end
 end
