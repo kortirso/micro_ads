@@ -17,7 +17,7 @@ module Ads
 
     def call
       validate_with(Ads::CreateContract, @ad.to_h)
-      @result = errors.blank? ? ::Ad.create(ad_attributes) : nil
+      @result = ::Ad.create(ad_attributes) if errors.blank?
     end
 
     private
