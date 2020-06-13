@@ -20,7 +20,7 @@ describe Api::V1, type: :routes do
     end
 
     it 'and returns ads list' do
-      parsed_body = JSON.parse(last_response.body).dig('ads', 'data')
+      parsed_body = response_body.dig('ads', 'data')
 
       expect(parsed_body.size).to eq 1
       expect(parsed_body[0].fetch('id')).to eq ad.id.to_s
@@ -49,14 +49,14 @@ describe Api::V1, type: :routes do
         allow(geocoder_service).to receive(:geocode).and_return(nil)
       end
 
-      it 'creates ad' do
+      it 'does not create ad' do
         expect { request }.not_to change(Ad, :count)
       end
 
       context 'in response' do
         before { request }
 
-        it 'returns success status' do
+        it 'returns error status' do
           expect(last_response.status).to eq(400)
         end
 
