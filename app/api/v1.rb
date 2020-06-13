@@ -29,9 +29,7 @@ module Api
       requires :user_id,     type: String, desc: 'User ID'
     end
     post 'ads' do
-      result = Ads::CreateService.call(
-        Ad.empty_params.merge(params)
-      )
+      result = Ads::CreateService.call(params)
 
       if result.ad
         { ad: AdSerializer.new(result.ad).serializable_hash }
