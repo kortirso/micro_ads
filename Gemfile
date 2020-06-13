@@ -36,6 +36,10 @@ gem 'dry-validation', '~> 1.5.0'
 # activerecord tasks for schema dump
 gem 'activerecord'
 
+# http client
+gem 'faraday', '~> 1.0.1'
+gem 'faraday_middleware', '~> 1.0.0'
+
 group :development do
   gem 'rubocop', '~> 0.85.0', require: false
   gem 'rubocop-performance', require: false
