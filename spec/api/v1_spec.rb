@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Api::V1 do
+describe Api::V1, type: :routes do
   context 'GET /api/v1' do
     it 'returns version of api' do
       get '/api/v1'
