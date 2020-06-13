@@ -34,10 +34,20 @@ describe Api::V1, type: :routes do
   end
 
   context 'POST /api/v1/ads' do
-    context 'with valid params' do
+    let(:geocoder_service) { instance_double('Client') }
+
+    before do
+      allow(GeocoderService::Client).to receive(:new).and_return(geocoder_service)
+    end
+
+    context 'with invalid params' do
       let(:params) { { ad: { title: '', description: '2', city: '3' }, user_id: 1 }.to_json }
       let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
       let(:request) { post '/api/v1/ads', params, headers }
+
+      before do
+        allow(geocoder_service).to receive(:geocode).and_return(nil)
+      end
 
       it 'creates ad' do
         expect { request }.not_to change(Ad, :count)
@@ -57,9 +67,15 @@ describe Api::V1, type: :routes do
     end
 
     context 'with valid params' do
-      let(:params) { { ad: { title: '1', description: '2', city: '3' }, user_id: 1 }.to_json }
+      let(:city) { 'City' }
+      let(:coordinates) { [1, 2] }
+      let(:params) { { ad: { title: '1', description: '2', city: city }, user_id: 1 }.to_json }
       let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
       let(:request) { post '/api/v1/ads', params, headers }
+
+      before do
+        allow(geocoder_service).to receive(:geocode).and_return(coordinates)
+      end
 
       it 'creates ad' do
         expect { request }.to change { Ad.count }.by(1)

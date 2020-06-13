@@ -24,14 +24,17 @@ module Api
       requires :ad, type: Hash do
         requires :title,       type: String, desc: 'Title'
         requires :city,        type: String, desc: 'City'
-        optional :description, type: String, desc: 'Description'
-        optional :lat,         type: Float,  desc: 'Latitude'
-        optional :lon,         type: Float,  desc: 'Longitude'
+        requires :description, type: String, desc: 'Description'
       end
       requires :user_id, type: String, desc: 'User ID'
     end
     post 'ads' do
-      service = Ads::CreateService.call(params)
+      coordinates = Geocoder::CallService.call(city: params.dig(:ad, :city))
+
+      service = Ads::CreateService.call(
+        ad:      params.fetch(:ad).merge(coordinates.result),
+        user_id: params.fetch(:user_id)
+      )
 
       if service.success?
         { ad: AdSerializer.new(service.result).serializable_hash }

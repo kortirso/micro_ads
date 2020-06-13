@@ -30,7 +30,6 @@ gem 'i18n', '~> 1.8.2'
 gem 'config', '~> 2.2.1'
 
 # Form objects
-gem 'dry-types', '~> 1.4.0'
 gem 'dry-validation', '~> 1.5.0'
 
 # activerecord tasks for schema dump
