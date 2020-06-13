@@ -16,8 +16,8 @@ ActiveRecord::Schema.define() do
   enable_extension "plpgsql"
 
   create_table "ads", id: :bigint, default: nil, force: :cascade do |t|
-    t.string "title", limit: 255, null: false
-    t.string "city", limit: 255, null: false
+    t.text "title", null: false
+    t.text "city", null: false
     t.text "description", null: false
     t.float "lat"
     t.float "lon"

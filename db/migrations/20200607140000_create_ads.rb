@@ -5,8 +5,8 @@ Sequel.migration do
     create_table(:ads) do
       primary_key :id, type: :Bignum
 
-      String :title, unique: false, null: false, fixed: true
-      String :city, unique: false, null: false, fixed: true
+      String :title, unique: false, null: false
+      String :city, unique: false, null: false
       Text :description, unique: false, null: false
 
       Float :lat, unique: false, null: true
