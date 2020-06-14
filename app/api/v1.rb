@@ -26,14 +26,16 @@ module Api
         requires :city,        type: String, desc: 'City'
         requires :description, type: String, desc: 'Description'
       end
-      requires :user_id, type: String, desc: 'User ID'
+      requires :token, type: String, desc: 'User token'
     end
     post 'ads' do
-      coordinates = Geocoder::CallService.call(city: params.dig(:ad, :city))
+      user_id = Auth::CallService.call(token: params.fetch(:token)).result
+      return error!(ErrorSerializer.from_messages('Forbidden'), 403) unless user_id
 
+      coordinates = Geocoder::CallService.call(city: params.dig(:ad, :city))
       service = Ads::CreateService.call(
         ad:      params.fetch(:ad).merge(coordinates.result),
-        user_id: params.fetch(:user_id)
+        user_id: user_id
       )
 
       if service.success?

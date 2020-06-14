@@ -24,7 +24,7 @@ module Ads
 
     def ad_attributes
       @ad.to_h.merge(
-        user_id: @user_id.to_i
+        'user_id' => @user_id
       ).compact
     end
   end

@@ -14,7 +14,7 @@ RSpec.describe GeocoderService::Client, type: :client do
     let(:errors) { [{ 'detail' => 'Geocoding error' }] }
     let(:body) { { 'errors' => errors } }
 
-    it 'returns coordinates' do
+    it 'returns nil' do
       expect(subject.geocode(nil)).to be_nil
     end
   end
@@ -24,7 +24,7 @@ RSpec.describe GeocoderService::Client, type: :client do
     let(:errors) { [{ 'detail' => 'Geocoding error' }] }
     let(:body) { { 'errors' => errors } }
 
-    it 'returns coordinates' do
+    it 'returns nil' do
       expect(subject.geocode('Москва')).to be_nil
     end
   end

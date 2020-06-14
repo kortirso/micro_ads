@@ -13,7 +13,7 @@ RSpec.describe Ads::CreateService do
           lat:         nil,
           lon:         nil
         },
-        user_id: '1'
+        user_id: 1
       }
     end
 
@@ -39,7 +39,7 @@ RSpec.describe Ads::CreateService do
           lat:         nil,
           lon:         nil
         },
-        user_id: '1'
+        user_id: 1
       }
     end
 
