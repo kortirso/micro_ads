@@ -8,7 +8,7 @@ ruby '2.7.1'
 gem 'grape', '~> 1.3.3'
 
 # rack
-gem 'rack', '~> 2.1.3'
+gem 'rack', '~> 2.1.4'
 
 # rake
 gem 'rake', '~> 13.0.1'
