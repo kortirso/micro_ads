@@ -12,8 +12,11 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    amq-protocol (2.3.1)
     ast (2.4.0)
     builder (3.2.4)
+    bunny (2.15.0)
+      amq-protocol (~> 2.3, >= 2.3.1)
     concurrent-ruby (1.1.6)
     config (2.2.1)
       deep_merge (~> 1.2, >= 1.2.1)
@@ -145,6 +148,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  bunny (>= 2.14.4)
   config (~> 2.2.1)
   database_cleaner-sequel (~> 1.8.0)
   dry-validation (~> 1.5.0)

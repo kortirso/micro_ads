@@ -205,3 +205,6 @@ Style/RedundantRegexpEscape:
 
 Style/SlicingWithRange:
   Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false

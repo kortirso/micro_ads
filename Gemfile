@@ -39,6 +39,9 @@ gem 'activerecord'
 gem 'faraday', '~> 1.0.1'
 gem 'faraday_middleware', '~> 1.0.0'
 
+# rabbitmq
+gem 'bunny', '>= 2.14.4'
+
 group :development do
   gem 'rubocop', '~> 0.85.0', require: false
   gem 'rubocop-performance', require: false
