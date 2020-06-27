@@ -99,7 +99,7 @@ GEM
     pg (1.2.3)
     puma (4.3.5)
       nio4r (~> 2.0)
-    rack (2.1.3)
+    rack (2.1.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-test (1.1.0)
@@ -148,7 +148,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
-  bunny (>= 2.14.4)
+  bunny (~> 2.15.0)
   config (~> 2.2.1)
   database_cleaner-sequel (~> 1.8.0)
   dry-validation (~> 1.5.0)
@@ -161,7 +161,7 @@ DEPENDENCIES
   json_spec
   pg (~> 1.2.3)
   puma (~> 4.3.5)
-  rack (~> 2.1.3)
+  rack (~> 2.1.4)
   rack-test (~> 1.1.0)
   rake (~> 13.0.1)
   rspec (~> 3.9.0)
