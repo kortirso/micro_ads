@@ -2,13 +2,9 @@
 
 module GeocoderService
   module Geocode
-    def geocode(city)
-      return if city.blank?
-
-      response = connection.get('geocode') do |request|
-        request.params['city'] = CGI.escape(city)
-      end
-      response.body.fetch('coordinates') if response.success?
+    def geocode_later(ad)
+      payload = { id: ad.id, city: CGI.escape(ad.city) }.to_json
+      publish(payload, type: 'geocode')
     end
   end
 end

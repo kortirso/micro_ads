@@ -32,9 +32,8 @@ module Api
       user_id = Auth::CallService.call(token: params.fetch(:token)).result
       return error!(ErrorSerializer.from_messages('Forbidden'), 403) unless user_id
 
-      coordinates = Geocoder::CallService.call(city: params.dig(:ad, :city))
       service = Ads::CreateService.call(
-        ad:      params.fetch(:ad).merge(coordinates.result),
+        ad:      params.fetch(:ad),
         user_id: user_id
       )
 

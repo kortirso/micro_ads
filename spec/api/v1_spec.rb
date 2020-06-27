@@ -34,11 +34,9 @@ describe Api::V1, type: :routes do
   end
 
   context 'POST /api/v1/ads' do
-    let(:geocoder_service) { instance_double('Client') }
     let(:auth_service) { instance_double('Client') }
 
     before do
-      allow(GeocoderService::Client).to receive(:new).and_return(geocoder_service)
       allow(AuthService::Client).to receive(:new).and_return(auth_service)
     end
 
@@ -49,7 +47,6 @@ describe Api::V1, type: :routes do
       let(:request) { post '/api/v1/ads', params, headers }
 
       before do
-        allow(geocoder_service).to receive(:geocode).and_return(nil)
         allow(auth_service).to receive(:auth).and_return(user_id)
       end
 
@@ -72,13 +69,11 @@ describe Api::V1, type: :routes do
 
     context 'with invalid token' do
       let(:user_id) { nil }
-      let(:coordinates) { [1, 2] }
       let(:params) { { ad: { title: '1', description: '2', city: '3' }, token: '111' }.to_json }
       let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
       let(:request) { post '/api/v1/ads', params, headers }
 
       before do
-        allow(geocoder_service).to receive(:geocode).and_return(coordinates)
         allow(auth_service).to receive(:auth).and_return(user_id)
       end
 
@@ -102,13 +97,11 @@ describe Api::V1, type: :routes do
     context 'with valid params and token' do
       let(:user_id) { 1 }
       let(:city) { 'City' }
-      let(:coordinates) { [1, 2] }
       let(:params) { { ad: { title: '1', description: '2', city: city }, token: '111' }.to_json }
       let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
       let(:request) { post '/api/v1/ads', params, headers }
 
       before do
-        allow(geocoder_service).to receive(:geocode).and_return(coordinates)
         allow(auth_service).to receive(:auth).and_return(user_id)
       end
 

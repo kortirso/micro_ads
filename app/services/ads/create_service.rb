@@ -11,13 +11,18 @@ module Ads
       option :lat, optional: true
       option :lon, optional: true
     end
+
     option :user_id
+    option :geocoder_service, default: proc { GeocoderService::Client.new }
 
     attr_reader :result
 
     def call
       validate_with(Ads::CreateContract, @ad.to_h)
-      @result = ::Ad.create(ad_attributes) if errors.blank?
+      return unless errors.blank?
+
+      @result = ::Ad.create(ad_attributes)
+      @geocoder_service.geocode_later(@result)
     end
 
     private
