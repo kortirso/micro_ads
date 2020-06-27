@@ -4,7 +4,7 @@ channel = RabbitMq.consumer_channel
 exchange = channel.default_exchange
 queue = channel.queue('ads', durable: true)
 
-queue.subscribe(manual_ack: true) do |delivery_info, properties, payload|
+queue.subscribe(manual_ack: true) do |_delivery_info, properties, payload|
   payload = JSON.parse(payload)
   lat, lon = payload.fetch('coordinates')
   Ads::UpdateService.call(
