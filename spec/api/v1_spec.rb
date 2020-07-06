@@ -37,7 +37,7 @@ describe Api::V1, type: :routes do
     let(:auth_service) { instance_double('Client') }
 
     before do
-      allow(AuthService::Client).to receive(:new).and_return(auth_service)
+      allow(AuthRpcService::RpcClient).to receive(:fetch).and_return(auth_service)
     end
 
     context 'with invalid params' do
@@ -47,7 +47,7 @@ describe Api::V1, type: :routes do
       let(:request) { post '/api/v1/ads', params, headers }
 
       before do
-        allow(auth_service).to receive(:auth).and_return(user_id)
+        allow(auth_service).to receive(:verify_token).and_return(user_id)
       end
 
       it 'does not create ad' do
@@ -74,7 +74,7 @@ describe Api::V1, type: :routes do
       let(:request) { post '/api/v1/ads', params, headers }
 
       before do
-        allow(auth_service).to receive(:auth).and_return(user_id)
+        allow(auth_service).to receive(:verify_token).and_return(user_id)
       end
 
       it 'does not create ad' do
@@ -102,7 +102,7 @@ describe Api::V1, type: :routes do
       let(:request) { post '/api/v1/ads', params, headers }
 
       before do
-        allow(auth_service).to receive(:auth).and_return(user_id)
+        allow(auth_service).to receive(:verify_token).and_return(user_id)
       end
 
       it 'creates ad' do

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AuthService
+module AuthHttpService
   module Auth
     def auth(token)
       return if token.blank?

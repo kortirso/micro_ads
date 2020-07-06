@@ -3,7 +3,7 @@
 require 'dry/initializer'
 require_relative 'auth'
 
-module AuthService
+module AuthHttpService
   class Client
     extend Dry::Initializer[undefined: false]
     include Auth

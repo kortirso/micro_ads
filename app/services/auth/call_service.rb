@@ -9,13 +9,13 @@ module Auth
     attr_reader :result
 
     def call
-      @result = auth_service.auth(@token)
+      @result = auth_service.verify_token(@token)
     end
 
     private
 
     def auth_service
-      AuthService::Client.new
+      AuthRpcService::RpcClient.fetch
     end
   end
 end

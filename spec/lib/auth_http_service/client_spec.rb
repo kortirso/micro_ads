@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe AuthService::Client, type: :client do
+RSpec.describe AuthHttpService::Client, type: :client do
   subject { described_class.new(connection: connection) }
 
   let(:headers) { { 'Content-Type' => 'application/json' } }

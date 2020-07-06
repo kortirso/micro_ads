@@ -2,8 +2,8 @@
 
 channel = RabbitMq.consumer_channel
 exchange = channel.default_exchange
-queue = channel.queue('ads', durable: true)
 
+queue = channel.queue('ads', durable: true)
 queue.subscribe(manual_ack: true) do |_delivery_info, properties, payload|
   payload = JSON.parse(payload)
   lat, lon = payload.fetch('coordinates')
@@ -15,7 +15,7 @@ queue.subscribe(manual_ack: true) do |_delivery_info, properties, payload|
 
   exchange.publish(
     '',
-    routing_key:    properties.reply_to,
-    correlation_id: properties.correlation_id
+    routing_key:    properties[:reply_to],
+    correlation_id: properties[:correlation_id]
   )
 end
