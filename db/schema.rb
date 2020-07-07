@@ -24,6 +24,7 @@ ActiveRecord::Schema.define() do
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, default: -> { "now()" }, null: false
     t.datetime "updated_at", precision: 6, default: -> { "now()" }, null: false
+    t.text "correlation_id"
     t.index ["user_id"], name: "ads_user_id_index"
   end
 

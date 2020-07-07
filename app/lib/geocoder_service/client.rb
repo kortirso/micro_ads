@@ -20,7 +20,11 @@ module GeocoderService
     def publish(payload, opts={})
       @queue.publish(
         payload,
-        opts.merge(persistent: true, app_id: 'ads')
+        opts.merge(
+          app_id:         'ads',
+          persistent:     true,
+          correlation_id: opts[:correlation_id]
+        )
       )
     end
   end
