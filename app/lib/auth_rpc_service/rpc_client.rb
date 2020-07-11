@@ -9,7 +9,6 @@ module AuthRpcService
     include RpcApi
 
     option :queue, default: proc { create_queue }
-    option :reply_channel, default: proc { create_reply_channel }
     option :reply_queue, default: proc { create_reply_queue }
     option :lock, default: proc { Mutex.new }
     option :condition, default: proc { ConditionVariable.new }
@@ -19,12 +18,11 @@ module AuthRpcService
     end
 
     def start
-      @reply_queue.subscribe(manual_ack: true) do |_delivery_info, properties, payload|
+      @reply_queue.subscribe do |_delivery_info, properties, payload|
         if properties[:correlation_id] == @correlation_id
           payload = JSON.parse(payload)
           @result = payload.fetch('user_id')
 
-          publish_default_exchange(properties)
           @lock.synchronize { @condition.signal }
         end
       end
@@ -41,12 +39,9 @@ module AuthRpcService
       channel.queue('auth', durable: true)
     end
 
-    def create_reply_channel
-      RabbitMq.consumer_channel
-    end
-
     def create_reply_queue
-      @reply_channel.queue('token', durable: true)
+      channel = RabbitMq.channel
+      channel.queue('amq.rabbitmq.reply-to')
     end
 
     def publish(payload, opts={})
@@ -56,23 +51,15 @@ module AuthRpcService
         @queue.publish(
           payload,
           opts.merge(
-            app_id:     'ads',
-            reply_to:   @reply_queue.name,
-            message_id: @correlation_id
+            app_id:         'ads',
+            reply_to:       @reply_queue.name,
+            correlation_id: @correlation_id
           )
         )
 
         @condition.wait(@lock)
         @result
       end
-    end
-
-    def publish_default_exchange(properties)
-      @reply_channel.default_exchange.publish(
-        '',
-        routing_key:    properties[:reply_to],
-        correlation_id: properties[:message_id]
-      )
     end
   end
 end
