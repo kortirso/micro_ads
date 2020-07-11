@@ -5,5 +5,3 @@ db:
   user:
   password:
   database: micro_ads
-rabbitmq:
-  consumer_pool: 10
