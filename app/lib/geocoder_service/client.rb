@@ -8,7 +8,7 @@ module GeocoderService
     extend Dry::Initializer[undefined: false]
     include Geocode
 
-    option :url, default: proc { 'http://localhost:9294/api/v1' }
+    option :url, default: proc { Settings.service.geocoder.url }
     option :connection, default: proc { build_connection }
 
     private

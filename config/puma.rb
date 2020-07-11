@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-port 9293
+port ENV.fetch('PORT', 9293)

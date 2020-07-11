@@ -1,3 +1,5 @@
+app:
+  name: micro_ads
 db:
   adapter: postgresql
   host: localhost
@@ -5,3 +7,9 @@ db:
   user:
   password:
   database: micro_ads
+service:
+  geocoder:
+    url: http://localhost:9294/api/v1
+logger:
+  path: log/app.log
+  level: info
