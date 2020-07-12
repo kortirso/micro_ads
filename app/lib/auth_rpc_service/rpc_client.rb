@@ -19,7 +19,7 @@ module AuthRpcService
 
     def start
       @reply_queue.subscribe do |_delivery_info, properties, payload|
-        if properties[:correlation_id] == @correlation_id
+        if properties.correlation_id == @correlation_id
           payload = JSON.parse(payload)
           @result = payload.fetch('user_id')
 
