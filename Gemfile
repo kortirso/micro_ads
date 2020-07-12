@@ -47,6 +47,7 @@ gem 'rack-ougai', '~> 0.2.1'
 gem 'rack-request-id', '~> 0.0.4'
 
 group :development do
+  gem 'amazing_print', '~> 1.2.1'
   gem 'rubocop', '~> 0.85.0', require: false
   gem 'rubocop-performance', require: false
 end
