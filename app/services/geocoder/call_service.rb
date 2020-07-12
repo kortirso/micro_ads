@@ -10,6 +10,11 @@ module Geocoder
 
     def call
       response = geocoder_service.geocode(@city)
+      Application.logger.info(
+        'geocoded city',
+        city:     @city,
+        response: response
+      )
       @result = response ? coordinates(response) : {}
     end
 
