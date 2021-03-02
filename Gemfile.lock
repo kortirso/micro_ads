@@ -1,12 +1,12 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activemodel (6.0.3.1)
-      activesupport (= 6.0.3.1)
-    activerecord (6.0.3.1)
-      activemodel (= 6.0.3.1)
-      activesupport (= 6.0.3.1)
-    activesupport (6.0.3.1)
+    activemodel (6.0.3.5)
+      activesupport (= 6.0.3.5)
+    activerecord (6.0.3.5)
+      activemodel (= 6.0.3.5)
+      activesupport (= 6.0.3.5)
+    activesupport (6.0.3.5)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -18,7 +18,7 @@ GEM
     builder (3.2.4)
     bunny (2.15.0)
       amq-protocol (~> 2.3, >= 2.3.1)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.8)
     config (2.2.1)
       deep_merge (~> 1.2, >= 1.2.1)
       dry-validation (~> 1.0, >= 1.0.0)
@@ -86,7 +86,7 @@ GEM
     json_spec (1.1.5)
       multi_json (~> 1.0)
       rspec (>= 2.0, < 4.0)
-    minitest (5.14.1)
+    minitest (5.14.4)
     multi_json (1.14.1)
     multipart-post (2.1.1)
     mustermann (1.1.1)
@@ -146,10 +146,10 @@ GEM
     ruby2_keywords (0.0.2)
     sequel (5.32.0)
     thread_safe (0.3.6)
-    tzinfo (1.2.7)
+    tzinfo (1.2.9)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
-    zeitwerk (2.3.0)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
