@@ -14,7 +14,7 @@ gem 'rack', '~> 2.1.4'
 gem 'rake', '~> 13.0.1'
 
 # web server
-gem 'puma', '~> 4.3.5'
+gem 'puma', '~> 4.3.9'
 
 # database connection
 gem 'pg', '~> 1.2.3'
